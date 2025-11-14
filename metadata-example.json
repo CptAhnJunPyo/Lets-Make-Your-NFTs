@@ -1,0 +1,36 @@
+{
+  "name": "Bachelor of Science - Alice Nguyen",
+  "description": "Verifiable certificate issued by ABC University.",
+  "image": "ipfs://bafy.../preview.png",
+  "external_url": "https://verify.example.org/cert/12345",
+  "attributes": [
+    {
+      "trait_type": "issuer_name",
+      "value": "ABC University"
+    },
+    {
+      "trait_type": "program",
+      "value": "Computer Science"
+    },
+    {
+      "trait_type": "issued_at",
+      "value": "2025-09-20T00:00:00Z"
+    },
+    {
+      "trait_type": "expires_at",
+      "value": ""
+    },
+    {
+      "trait_type": "chain_id",
+      "value": 42161
+    },
+    {
+      "trait_type": "policy",
+      "value": "non-transferable"
+    }
+  ],
+  "certificate_hash": "0x1f3a...abcd",
+  "file_cid": "bafybeigdyr...xyz",
+  "issuer": "0xIssuerAddress",
+  "schema_version": "1.0.0"
+}
