@@ -35,7 +35,7 @@ app.post('/api/mint', upload.single('certificateFile'), async (req, res) => {
 
         if (!file) return res.status(400).json({ success: false, error: "Thiếu file" });
 
-        console.log(`🔄 Minting cho: ${userAddress}`);
+        console.log(`Minting cho: ${userAddress}`);
 
         // A. Upload Ảnh lên Pinata
         const fileStream = require('stream').Readable.from(file.buffer);
@@ -68,7 +68,6 @@ app.post('/api/mint', upload.single('certificateFile'), async (req, res) => {
         res.status(500).json({ success: false, error: error.message });
     }
 });
-const verifyContract = new ethers.Contract(process.env.CONTRACT_ADDRESS, contractABI, provider);
 app.post('/api/verify', upload.single('verifyFile'), async (req, res) => {
     try {
         const file = req.file;
@@ -76,11 +75,11 @@ app.post('/api/verify', upload.single('verifyFile'), async (req, res) => {
 
         if (!file) return res.status(400).json({ message: "Vui lòng upload file gốc để xác thực" });
 
-        console.log("🔍 Đang verify file...");
+        console.log("Đang verify file...");
 
         // A. Tính Hash của file vừa upload (Phải dùng đúng thuật toán SHA256 như lúc Mint)
         const fileHash = crypto.createHash('sha256').update(file.buffer).digest('hex');
-        console.log("📝 Hash tính được từ file:", fileHash);
+        console.log("Hash tính được từ file:", fileHash);
 
         // B. Chuyển sang format Hash của Solidity (Keccak256 của chuỗi hex)
         // Vì trong Contract: hash = keccak256(abi.encodePacked(dataHashBytes))
@@ -106,7 +105,7 @@ app.post('/api/verify', upload.single('verifyFile'), async (req, res) => {
         });
 
     } catch (error) {
-        console.error("❌ Lỗi Verify:", error);
+        console.error("Lỗi Verify:", error);
         res.status(500).json({ message: error.message });
     }
 });

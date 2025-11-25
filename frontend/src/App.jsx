@@ -4,7 +4,7 @@ import axios from 'axios';
 import './App.css';
 
 // CẬP NHẬT ĐỊA CHỈ CONTRACT MỚI CỦA BẠN VÀO ĐÂY
-const CONTRACT_ADDRESS = "0x...COPY_DIA_CHI_CONTRACT_MOI_VAO_DAY...";
+const CONTRACT_ADDRESS = "0x95C23FFD28612884bd47468f776849B427D77D57";
 
 const contractABI = [
   "function tokenOfOwnerByIndex(address owner, uint256 index) view returns (uint256)",
@@ -42,7 +42,7 @@ function App() {
     }
   };
 
-  // --- 2. LẤY DANH SÁCH NFT (FIX LỖI IPFS & BIGINT) ---
+  // --- 2. LẤY DANH SÁCH NFT ---
   const fetchUserNFTs = async (address, signer) => {
     try {
       const contract = new ethers.Contract(CONTRACT_ADDRESS, contractABI, signer);
@@ -54,8 +54,6 @@ function App() {
         try {
           const tokenId = await contract.tokenOfOwnerByIndex(address, i);
           const tokenURI = await contract.tokenURI(tokenId);
-          
-          // Dùng Gateway công cộng nhanh hơn để tránh lỗi timeout
           const httpURI = tokenURI.replace("ipfs://", "https://cloudflare-ipfs.com/ipfs/");
           
           const metaRes = await axios.get(httpURI);
@@ -79,7 +77,7 @@ function App() {
   // --- 3. MINT (GỌI BACKEND) ---
   const handleMint = async () => {
     if (!mintFile || !account) return alert("Thiếu thông tin!");
-    setStatus("⏳ Đang Mint...");
+    setStatus("Đang Mint...");
     
     const form = new FormData();
     form.append('userAddress', account);
@@ -90,12 +88,12 @@ function App() {
     try {
       const res = await axios.post('http://localhost:3001/api/mint', form);
       if (res.data.success) {
-        setStatus("✅ Mint thành công!");
+        setStatus("Mint thành công!");
         fetchUserNFTs(account, new ethers.BrowserProvider(window.ethereum).getSigner());
       }
     } catch (e) {
       console.error(e);
-      setStatus("❌ Lỗi Mint");
+      setStatus("Lỗi Mint");
     }
   };
 
@@ -115,7 +113,7 @@ function App() {
       
       setStatus("⏳ Đang chuyển...");
       await tx.wait();
-      setStatus("✅ Chuyển thành công!");
+      setStatus("Chuyển thành công!");
       fetchUserNFTs(from, signer);
     } catch (e) {
       console.error(e);
@@ -135,9 +133,9 @@ function App() {
     try {
       const res = await axios.post('http://localhost:3001/api/verify', form);
       setVerifyResult(res.data);
-      setStatus("✅ Đã có kết quả!");
+      setStatus("Đã có kết quả!");
     } catch (e) {
-      setStatus("❌ Lỗi Verify");
+      setStatus("Lỗi Verify");
     }
   };
 
@@ -169,6 +167,7 @@ function App() {
                     {verifyResult.verified && (
                         <>
                             ID: #{verifyResult.tokenId} <br/>
+                            Hash: {verifyResult.Hash} <br/>
                             Chủ sở hữu: {verifyResult.currentOwner.slice(0,64)} <br/>
                             {verifyResult.isYourCert ? " ĐÂY LÀ CỦA BẠN!" : " KHÔNG PHẢI CỦA BẠN"}
                         </>
