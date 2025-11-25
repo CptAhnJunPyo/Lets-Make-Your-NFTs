@@ -7,7 +7,7 @@ const fs = require('fs');
 const multer = require('multer');
 const crypto = require('crypto');
 
-// Cấu hình
+// Cấu hìnhh
 const app = express();
 app.use(cors());
 app.use(express.json());

@@ -153,7 +153,7 @@ function App() {
             <input type="file" onChange={e => setMintFile(e.target.files[0])} /> <br/><br/>
             <button onClick={handleMint}>Mint NFT</button>
         </div>
-
+t
         {/* FORM VERIFY */}
         <div>
             <h3>🔍 2. Xác thực tài liệu (Verify)</h3>
