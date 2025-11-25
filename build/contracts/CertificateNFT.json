@@ -359,7 +359,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -372,7 +373,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -409,7 +411,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -428,7 +431,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -447,7 +451,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -489,7 +494,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -513,7 +519,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -526,7 +533,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -545,7 +553,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -663,7 +672,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -705,7 +715,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -747,7 +758,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -766,7 +778,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.24+commit.e11b9ed9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"defaultAdmin\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"minter\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"AccessControlBadConfirmation\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"neededRole\",\"type\":\"bytes32\"}],\"name\":\"AccessControlUnauthorizedAccount\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"ERC721IncorrectOwner\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"ERC721InsufficientApproval\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"approver\",\"type\":\"address\"}],\"name\":\"ERC721InvalidApprover\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"}],\"name\":\"ERC721InvalidOperator\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"ERC721InvalidOwner\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"receiver\",\"type\":\"address\"}],\"name\":\"ERC721InvalidReceiver\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"ERC721InvalidSender\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"ERC721NonexistentToken\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"approved\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"ApprovalForAll\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_fromTokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_toTokenId\",\"type\":\"uint256\"}],\"name\":\"BatchMetadataUpdate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"dataHash\",\"type\":\"string\"}],\"name\":\"CertificateMinted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"}],\"name\":\"MetadataUpdate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"previousAdminRole\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"newAdminRole\",\"type\":\"bytes32\"}],\"name\":\"RoleAdminChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"RoleGranted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"RoleRevoked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"DEFAULT_ADMIN_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MINTER_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"getApproved\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"getRoleAdmin\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"grantRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"hasRole\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"}],\"name\":\"isApprovedForAll\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"url\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"dataHashBytes\",\"type\":\"string\"}],\"name\":\"mintCertificate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"ownerOf\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"callerConfirmation\",\"type\":\"address\"}],\"name\":\"renounceRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"revokeRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"setApprovalForAll\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"tokenURI\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"usedDataHashes\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"errors\":{\"AccessControlBadConfirmation()\":[{\"details\":\"The caller of a function is not the expected one. NOTE: Don't confuse with {AccessControlUnauthorizedAccount}.\"}],\"AccessControlUnauthorizedAccount(address,bytes32)\":[{\"details\":\"The `account` is missing a role.\"}],\"ERC721IncorrectOwner(address,uint256,address)\":[{\"details\":\"Indicates an error related to the ownership over a particular token. Used in transfers.\",\"params\":{\"owner\":\"Address of the current owner of a token.\",\"sender\":\"Address whose tokens are being transferred.\",\"tokenId\":\"Identifier number of a token.\"}}],\"ERC721InsufficientApproval(address,uint256)\":[{\"details\":\"Indicates a failure with the `operator`\\u2019s approval. Used in transfers.\",\"params\":{\"operator\":\"Address that may be allowed to operate on tokens without being their owner.\",\"tokenId\":\"Identifier number of a token.\"}}],\"ERC721InvalidApprover(address)\":[{\"details\":\"Indicates a failure with the `approver` of a token to be approved. Used in approvals.\",\"params\":{\"approver\":\"Address initiating an approval operation.\"}}],\"ERC721InvalidOperator(address)\":[{\"details\":\"Indicates a failure with the `operator` to be approved. Used in approvals.\",\"params\":{\"operator\":\"Address that may be allowed to operate on tokens without being their owner.\"}}],\"ERC721InvalidOwner(address)\":[{\"details\":\"Indicates that an address can't be an owner. For example, `address(0)` is a forbidden owner in ERC-20. Used in balance queries.\",\"params\":{\"owner\":\"Address of the current owner of a token.\"}}],\"ERC721InvalidReceiver(address)\":[{\"details\":\"Indicates a failure with the token `receiver`. Used in transfers.\",\"params\":{\"receiver\":\"Address to which tokens are being transferred.\"}}],\"ERC721InvalidSender(address)\":[{\"details\":\"Indicates a failure with the token `sender`. Used in transfers.\",\"params\":{\"sender\":\"Address whose tokens are being transferred.\"}}],\"ERC721NonexistentToken(uint256)\":[{\"details\":\"Indicates a `tokenId` whose `owner` is the zero address.\",\"params\":{\"tokenId\":\"Identifier number of a token.\"}}]},\"events\":{\"Approval(address,address,uint256)\":{\"details\":\"Emitted when `owner` enables `approved` to manage the `tokenId` token.\"},\"ApprovalForAll(address,address,bool)\":{\"details\":\"Emitted when `owner` enables or disables (`approved`) `operator` to manage all of its assets.\"},\"BatchMetadataUpdate(uint256,uint256)\":{\"details\":\"This event emits when the metadata of a range of tokens is changed. So that the third-party platforms such as NFT market could timely update the images and related attributes of the NFTs.\"},\"MetadataUpdate(uint256)\":{\"details\":\"This event emits when the metadata of a token is changed. So that the third-party platforms such as NFT market could timely update the images and related attributes of the NFT.\"},\"RoleAdminChanged(bytes32,bytes32,bytes32)\":{\"details\":\"Emitted when `newAdminRole` is set as ``role``'s admin role, replacing `previousAdminRole` `DEFAULT_ADMIN_ROLE` is the starting admin for all roles, despite {RoleAdminChanged} not being emitted to signal this.\"},\"RoleGranted(bytes32,address,address)\":{\"details\":\"Emitted when `account` is granted `role`. `sender` is the account that originated the contract call. This account bears the admin role (for the granted role). Expected in cases where the role was granted using the internal {AccessControl-_grantRole}.\"},\"RoleRevoked(bytes32,address,address)\":{\"details\":\"Emitted when `account` is revoked `role`. `sender` is the account that originated the contract call:   - if using `revokeRole`, it is the admin role bearer   - if using `renounceRole`, it is the role bearer (i.e. `account`)\"},\"Transfer(address,address,uint256)\":{\"details\":\"Emitted when `tokenId` token is transferred from `from` to `to`.\"}},\"kind\":\"dev\",\"methods\":{\"approve(address,uint256)\":{\"details\":\"Gives permission to `to` to transfer `tokenId` token to another account. The approval is cleared when the token is transferred. Only a single account can be approved at a time, so approving the zero address clears previous approvals. Requirements: - The caller must own the token or be an approved operator. - `tokenId` must exist. Emits an {Approval} event.\"},\"balanceOf(address)\":{\"details\":\"Returns the number of tokens in ``owner``'s account.\"},\"getApproved(uint256)\":{\"details\":\"Returns the account approved for `tokenId` token. Requirements: - `tokenId` must exist.\"},\"getRoleAdmin(bytes32)\":{\"details\":\"Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}.\"},\"grantRole(bytes32,address)\":{\"details\":\"Grants `role` to `account`. If `account` had not been already granted `role`, emits a {RoleGranted} event. Requirements: - the caller must have ``role``'s admin role. May emit a {RoleGranted} event.\"},\"hasRole(bytes32,address)\":{\"details\":\"Returns `true` if `account` has been granted `role`.\"},\"isApprovedForAll(address,address)\":{\"details\":\"Returns if the `operator` is allowed to manage all of the assets of `owner`. See {setApprovalForAll}\"},\"mintCertificate(address,string,string)\":{\"details\":\"H\\u00e0m Mint (Ch\\u1ec9 v\\u00ed c\\u00f3 quy\\u1ec1n MINTER_ROLE m\\u1edbi g\\u1ecdi \\u0111\\u01b0\\u1ee3c)\",\"params\":{\"dataHashBytes\":\"Hash c\\u1ee7a d\\u1eef li\\u1ec7u g\\u1ed1c (SHA256) \\u0111\\u1ec3 \\u0111\\u1ea3m b\\u1ea3o t\\u00ednh to\\u00e0n v\\u1eb9n v\\u00e0 duy nh\\u1ea5t\",\"to\":\"\\u0110\\u1ecba ch\\u1ec9 v\\u00ed c\\u1ee7a User nh\\u1eadn NFT\",\"url\":\"Metadata URL (IPFS link)\"}},\"name()\":{\"details\":\"Returns the token collection name.\"},\"ownerOf(uint256)\":{\"details\":\"Returns the owner of the `tokenId` token. Requirements: - `tokenId` must exist.\"},\"renounceRole(bytes32,address)\":{\"details\":\"Revokes `role` from the calling account. Roles are often managed via {grantRole} and {revokeRole}: this function's purpose is to provide a mechanism for accounts to lose their privileges if they are compromised (such as when a trusted device is misplaced). If the calling account had been revoked `role`, emits a {RoleRevoked} event. Requirements: - the caller must be `callerConfirmation`. May emit a {RoleRevoked} event.\"},\"revokeRole(bytes32,address)\":{\"details\":\"Revokes `role` from `account`. If `account` had been granted `role`, emits a {RoleRevoked} event. Requirements: - the caller must have ``role``'s admin role. May emit a {RoleRevoked} event.\"},\"safeTransferFrom(address,address,uint256)\":{\"details\":\"Safely transfers `tokenId` token from `from` to `to`, checking first that contract recipients are aware of the ERC-721 protocol to prevent tokens from being forever locked. Requirements: - `from` cannot be the zero address. - `to` cannot be the zero address. - `tokenId` token must exist and be owned by `from`. - If the caller is not `from`, it must have been allowed to move this token by either {approve} or   {setApprovalForAll}. - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon   a safe transfer. Emits a {Transfer} event.\"},\"safeTransferFrom(address,address,uint256,bytes)\":{\"details\":\"Safely transfers `tokenId` token from `from` to `to`. Requirements: - `from` cannot be the zero address. - `to` cannot be the zero address. - `tokenId` token must exist and be owned by `from`. - If the caller is not `from`, it must be approved to move this token by either {approve} or {setApprovalForAll}. - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon   a safe transfer. Emits a {Transfer} event.\"},\"setApprovalForAll(address,bool)\":{\"details\":\"Approve or remove `operator` as an operator for the caller. Operators can call {transferFrom} or {safeTransferFrom} for any token owned by the caller. Requirements: - The `operator` cannot be the address zero. Emits an {ApprovalForAll} event.\"},\"symbol()\":{\"details\":\"Returns the token collection symbol.\"},\"transferFrom(address,address,uint256)\":{\"details\":\"Transfers `tokenId` token from `from` to `to`. WARNING: Note that the caller is responsible to confirm that the recipient is capable of receiving ERC-721 or else they may be permanently lost. Usage of {safeTransferFrom} prevents loss, though the caller must understand this adds an external call which potentially creates a reentrancy vulnerability. Requirements: - `from` cannot be the zero address. - `to` cannot be the zero address. - `tokenId` token must be owned by `from`. - If the caller is not `from`, it must be approved to move this token by either {approve} or {setApprovalForAll}. Emits a {Transfer} event.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/CertificateNFT.sol\":\"CertificateNFT\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/access/AccessControl.sol\":{\"keccak256\":\"0x6f30a8790e028c7ea00cbf93d99c7fc64e5ba137626fabf66917af2412cbc353\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1442e916083a4a866cbf2480814b2b8ac43df520d51d38e7842d1fa942f04dd3\",\"dweb:/ipfs/QmbJC7ex3ccCfV9LZkpbzj29Lvv6mJqa8NwH4KzVstCxN3\"]},\"@openzeppelin/contracts/access/IAccessControl.sol\":{\"keccak256\":\"0xde7d3b59b25c58eb72a7f40abd9ced0fdf5dc045d64478ce23c79121fbe4c120\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://02c5726af650767cb73c81b6dc270a70981f2aa9aeb69cb71739a1d702f569d6\",\"dweb:/ipfs/QmZXXh8dhDioEJUptvuKcKH2BsjUhiMbju1MJu1QmFAEch\"]},\"@openzeppelin/contracts/interfaces/IERC165.sol\":{\"keccak256\":\"0xc6ebdb3497d4662bd3aa8bc48bf356f7912a5fa42f9bb4f8584817cadf165784\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8caaa17034e30866b5df3b1f0ebd60abcda8757e3aa141962b5c07a69608ffae\",\"dweb:/ipfs/QmW3bspXQY8Khz4c63uUcRCnprSKcWJT8avaKqvkWo9NF4\"]},\"@openzeppelin/contracts/interfaces/IERC4906.sol\":{\"keccak256\":\"0x389a02f8f782ee575ae345b2fa316606adc5f361df7169e47e5722287853923d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://14778d30c7f06fbf9517797741476d6c85c8dfee461d07989a28e621e8dc2f5d\",\"dweb:/ipfs/QmYMfR8QTozNiM9dYWn3aMHo9GNLuiAFcRNpjyetFhuEJ3\"]},\"@openzeppelin/contracts/interfaces/IERC721.sol\":{\"keccak256\":\"0xec9642e51187b116c53ed6694acbabc013ead05a4ab89d9497886039b001a430\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9362eaab05d3ec7ad246504ba25f588ab0be1da5586b86c426c8c0018e8145ae\",\"dweb:/ipfs/QmVpws4cNeU5JbEq1ZGyMMKj8YZyKSDjwThkjNuWo9c5qV\"]},\"@openzeppelin/contracts/interfaces/draft-IERC6093.sol\":{\"keccak256\":\"0x02994252f4f2abd1280e003374b6081a5e78f46bbdedbfd56530129e37ef6e53\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0fce7ecf3f9cae3e3e2de8a74a9bb2861f88e578a918171e550f6fa064932a07\",\"dweb:/ipfs/Qma7QN4TweNTyWmsAPJbxPEb1uN53m5vVnm1cyvC13nu1c\"]},\"@openzeppelin/contracts/token/ERC721/ERC721.sol\":{\"keccak256\":\"0xdeec6fe90d672cf1c1376b62917f2866d28e96a81e9fde82f2099b088824cc22\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b8a048c77952bbce809f1ba22f5fb37303d98bf9f9204a8a77134d75f28393ff\",\"dweb:/ipfs/QmNwCjcEBt1SwRTZeENgejAFzLfhi2k8TCRQBhcov9HqVh\"]},\"@openzeppelin/contracts/token/ERC721/IERC721.sol\":{\"keccak256\":\"0x2304d2184332f82e7a8a3e0145cf525b08fe855c46ffce6df83cfbbf59a159b2\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://071c1587ce7f87951803f14915bf3d2dfcc1865abb4f0dbb803c73602d18bcbd\",\"dweb:/ipfs/QmXw1aRNSTMvgYVgEuPweHWish72FJaPL8fw4RagkGGSCq\"]},\"@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol\":{\"keccak256\":\"0xc14679dbfb7edf45a291b326a7da2622f3de55656ba5f8d4385dc0e633d9f023\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d17425aa3326a8bcf6efb198ac861c8002d0a4651d89a4c3eb46b275630dbbfa\",\"dweb:/ipfs/QmW9V9a2x6sto3RAan9JYVoUZHchkFiBoNs8xyrkbB3WBz\"]},\"@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol\":{\"keccak256\":\"0xb2fda7719f5d6eb3c6a0c358e94ad4ee1df994c16db83288c2c148b6452d3a9a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5ba399ef63213eb4749af27a22a468d9c4b1e4650e4299630a86a3c93881979f\",\"dweb:/ipfs/QmeksAFFxCUBC8k8VcRboDugZcq31q79r7XM9xJibkaKGo\"]},\"@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol\":{\"keccak256\":\"0x7bedc14d5825024193d88afd6f3a160192c352222b585d7f6caf8107b12847ca\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a7e7132b54bb835c0a4dd366a38469fd05fe992a88f18a66f95a346269011011\",\"dweb:/ipfs/QmPEWHQkLYPBYDkA7iLP3mzsSdBBFN9ezZmUisWAiAozt7\"]},\"@openzeppelin/contracts/token/ERC721/utils/ERC721Utils.sol\":{\"keccak256\":\"0xecf223301582a7f67f7fbde3a95bca2f7b9ed9501511b5d836e9e737daf137eb\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e5dc2c0672dc5ef63339e1ad5980d52382d65a6cb14a320907c0332af21eeebb\",\"dweb:/ipfs/QmZ8eDWs3D3bV9wMyXbyCMswERYZvpsGSrmaiDSTfkpxFS\"]},\"@openzeppelin/contracts/utils/Context.sol\":{\"keccak256\":\"0x3dcd533a3f709bda89bb8e649eb97aed96578e606f3796609544b1dcff975a0b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://83fa9b15077fd2f33f6c175d694e2f7ae9c9a289c7feaca40aa7d6feb8d87c26\",\"dweb:/ipfs/QmQLfKCJ7mjiEeCGN1sHgWT8wjAMbAmBqcBVoQQyUZa5ws\"]},\"@openzeppelin/contracts/utils/Panic.sol\":{\"keccak256\":\"0x65fd7c9cac0812d510bbaac59b007da1df6f3820f939fca04fd2b7ed07e341c6\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f30f7cf8b553278b1bbad1f6aaf4b227b98b1532b3c16dbca92d815d627779df\",\"dweb:/ipfs/QmTkA1v7mrd2ymdTcPYFuNjguKhQx99npcPYKAdMfgfKvB\"]},\"@openzeppelin/contracts/utils/Strings.sol\":{\"keccak256\":\"0xf070089a7ff9e06fdaca1b3234648d50625df4b450bafbfbdd90e28b2da50536\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b678eaa15a9ab898685e7c279d8d66d989add0c21d12ce92448908dab320c12b\",\"dweb:/ipfs/QmXVCpjxnv23c1WeLVS4pCY1YNdc4gDX9TF3MUweBBwWJn\"]},\"@openzeppelin/contracts/utils/introspection/ERC165.sol\":{\"keccak256\":\"0x10c3073d907e4a1a72661ca659dba68eac43562d61767de21b43b4c912922ec3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://cf06af8f1cf586384bdd01aa51dcd112d33e8708ef9a0f5465f27bfa9b54bf27\",\"dweb:/ipfs/QmSpQLtUxVt1qBrdtTBwARaDCgwvZg2ZyQebQHNKHWFyCM\"]},\"@openzeppelin/contracts/utils/introspection/IERC165.sol\":{\"keccak256\":\"0x564310f4788f096e1c1e77edd645999aa7fbad46dd545d7a722f70d5cfe19033\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://844ba854105b8a3e4cfb2cc37de926020beb97b238e85e00df05b79be953cec9\",\"dweb:/ipfs/QmWG5HLDsFRNe3A2ZxvKcB79tqJN9V5yTwcBUjUPYhDki3\"]},\"@openzeppelin/contracts/utils/math/Math.sol\":{\"keccak256\":\"0xe09e820269ce218384211e4bf344056f0aab77a27b953012a3fb647d7631b7c2\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0a8e7a7218203b059b4b4a423a93d6066eb9cec0a8affde80bb4a6c44d6a14a0\",\"dweb:/ipfs/QmSbmEzwGBFD3TntztEE5ZFLBqP1SZYiQhA1dLoDgzrcz4\"]},\"@openzeppelin/contracts/utils/math/SafeCast.sol\":{\"keccak256\":\"0xf1e73884b1e40057009853b1ee55ec66413cfa5eaa9074e5dd85bd070ea8b91c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1d29fd43e41bd73ac0fb65ac77c309c88651a42f8e49989cf1558f64f731697b\",\"dweb:/ipfs/Qmd61ZCYWHj9PJ3uSXaJekif8tkKgmfU6PLunszwhY2QX3\"]},\"@openzeppelin/contracts/utils/math/SignedMath.sol\":{\"keccak256\":\"0x7c35afe4f4b7e64ea6efa5216f51790d8ce80cd764a00790203a59ebf20202ec\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0b264b01df570c48603e16066aea73d3200c78523f9d94dd587a61eafa33705c\",\"dweb:/ipfs/QmayVg47dBKddrgrgsbr4Wu8hQBWZk5oMpiUtXKz1uEo1v\"]},\"project:/contracts/CertificateNFT.sol\":{\"keccak256\":\"0xdd4959aac32b76c4b3747ed18b0fe9c464a869577afab002594ced543294b2c6\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9b3432460ff67ac67048036fb8a2c07a09e522657155ef9d95b34efe35bcfc73\",\"dweb:/ipfs/Qmesx9TpYvX4LXnRR5gMzEKEtnjDAuZXdtieTGNmiDa11o\"]}},\"version\":1}",
@@ -22208,9 +22221,17 @@
     "name": "solc",
     "version": "0.8.24+commit.e11b9ed9.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "11155111": {
+      "events": {},
+      "links": {},
+      "address": "0xf2f8dd6738d23628Fb74071cC43Fb3F0EaE6E8d2",
+      "transactionHash": "0xd905f1bd51c855593f05e1be9c883525e8ccf7aafa68eeea0176393564b2f1dd"
+    }
+  },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2025-11-24T14:30:27.244Z",
+  "updatedAt": "2025-11-25T04:01:51.058Z",
+  "networkType": "ethereum",
   "devdoc": {
     "errors": {
       "AccessControlBadConfirmation()": [

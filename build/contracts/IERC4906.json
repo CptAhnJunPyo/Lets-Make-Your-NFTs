@@ -610,7 +610,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.16",
-  "updatedAt": "2025-11-24T14:30:27.173Z",
+  "updatedAt": "2025-11-25T04:01:13.900Z",
   "devdoc": {
     "events": {
       "Approval(address,address,uint256)": {
