@@ -6,7 +6,7 @@ const pinataSDK = require('@pinata/sdk');
 const fs = require('fs');
 const multer = require('multer');
 const crypto = require('crypto');
-const OpenAI = require('openai');
+
 // Cấu hình
 const app = express();
 app.use(cors());
