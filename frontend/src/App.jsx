@@ -27,7 +27,6 @@ function App() {
   // Mint Form State
   const [formData, setFormData] = useState({ name: '', course: '' });
   const [selectedFile, setSelectedFile] = useState(null);
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   // Verify Form State
   const [verifyFile, setVerifyFile] = useState(null);
@@ -97,39 +96,6 @@ function App() {
     } catch (e) {
       console.error("Lỗi fetch list:", e);
     }
-  };
-  const handleAnalyzeImage = async (file) => {
-    if (!file) return;
-    setIsAnalyzing(true);
-    
-    const form = new FormData();
-    form.append('analyzeFile', file);
-
-    try {
-      // Gọi Backend
-      const res = await axios.post('http://localhost:3001/api/analyze', form, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      });
-
-      if (res.data.success) {
-        const data = res.data.data;
-        // Tự động điền vào Form
-        setFormData({
-            ...formData,
-            name: data.recipient_name || "",
-            course: data.program || "",
-            // Bạn có thể lưu thêm các trường khác vào state nếu muốn hiển thị
-            description: data.description,
-            issuer_name: data.issuer_name,
-            issued_at: data.issued_at
-        });
-        alert("🤖 AI đã điền thông tin! Vui lòng kiểm tra lại.");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("Không thể phân tích ảnh. Vui lòng nhập tay.");
-    }
-    setIsAnalyzing(false);
   };
   // --- LOGIC 3: MINT NFT ---
   const handleMintRequest = async () => {
@@ -287,20 +253,8 @@ function App() {
                 <div className="upload-area">
                   <div className="upload-zone">
                   <input type="file" id="file-upload" className="file-input-hidden" accept="image/*,.pdf"
-                      onChange={(e) => {
-                          const file = e.target.files[0];
-                          setSelectedFile(file);
-                          // Tự động gọi AI khi chọn file (hoặc làm nút bấm riêng tùy bạn)
-                          handleAnalyzeImage(file); 
-                      }}
+                      onChange={(e) => setSelectedFile(e.target.files[0])}
                     />
-
-                  {/* Hiển thị trạng thái loading khi AI đang chạy */}
-                  {isAnalyzing && (
-                      <div style={{textAlign: 'center', color: '#6366f1', margin: '10px 0'}}>
-                          ✨ AI đang đọc thông tin từ ảnh...
-                      </div>
-                  )}
                     <label htmlFor="file-upload" className="upload-label">
                       {selectedFile ? (
                         <div className="file-preview">

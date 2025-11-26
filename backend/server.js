@@ -87,56 +87,6 @@ app.post('/api/mint', upload.single('certificateFile'), async (req, res) => {
         res.status(500).json({ success: false, error: error.message });
     }
 });
-app.post('/api/analyze', upload.single('analyzeFile'), async (req, res) => {
-    try {
-        const file = req.file;
-        if (!file) return res.status(400).json({ success: false, error: "Thiếu file ảnh" });
-
-        // 1. Chuyển ảnh sang Base64 để gửi cho AI
-        const base64Image = file.buffer.toString('base64');
-        const dataUrl = `data:${file.mimetype};base64,${base64Image}`;
-
-        // 2. Gọi GPT-4o để phân tích
-        console.log("🤖 Đang gửi ảnh sang AI để phân tích...");
-        
-        const completion = await openai.chat.completions.create({
-            model: "gpt-4o",
-            messages: [
-                {
-                    role: "system",
-                    content: `Bạn là một trợ lý AI chuyên trích xuất dữ liệu từ hình ảnh chứng chỉ/bằng cấp. 
-                    Nhiệm vụ của bạn là trả về một JSON duy nhất (không có markdown, không có text thừa) theo cấu trúc sau:
-                    {
-                        "recipient_name": "Tên người nhận",
-                        "issuer_name": "Tên trường/tổ chức cấp",
-                        "program": "Tên khóa học/ngành học",
-                        "issued_at": "Ngày cấp (Format ISO 8601 YYYY-MM-DD nếu tìm thấy, nếu không thì để null)",
-                        "description": "Mô tả ngắn gọn về chứng chỉ này (ví dụ: Bằng cử nhân ngành X cấp bởi trường Y)"
-                    }
-                    Nếu không tìm thấy trường nào, hãy để giá trị là chuỗi rỗng "".`
-                },
-                {
-                    role: "user",
-                    content: [
-                        { type: "text", text: "Hãy trích xuất thông tin từ chứng chỉ này." },
-                        { type: "image_url", image_url: { url: dataUrl } },
-                    ],
-                },
-            ],
-            response_format: { type: "json_object" } // Bắt buộc trả về JSON
-        });
-
-        // 3. Parse kết quả
-        const aiResult = JSON.parse(completion.choices[0].message.content);
-        console.log("✅ AI trích xuất xong:", aiResult);
-
-        res.json({ success: true, data: aiResult });
-
-    } catch (error) {
-        console.error("❌ Lỗi Analyze:", error);
-        res.status(500).json({ success: false, error: error.message });
-    }
-});
 app.post('/api/verify', upload.single('verifyFile'), async (req, res) => {
     try {
         const file = req.file;
