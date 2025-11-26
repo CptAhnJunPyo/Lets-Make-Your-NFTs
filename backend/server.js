@@ -7,7 +7,7 @@ const fs = require('fs');
 const multer = require('multer');
 const crypto = require('crypto');
 
-// Cấu hìnhh
+// Cấu hình
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -26,7 +26,9 @@ const contractABI = [
 const contract = new ethers.Contract(process.env.CONTRACT_ADDRESS, contractABI, wallet);
 const readContract = new ethers.Contract(process.env.CONTRACT_ADDRESS, contractABI, provider);
 const pinata = new pinataSDK(process.env.PINATA_API_KEY, process.env.PINATA_SECRET_KEY);
-
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+});
 // --- API ENDPOINT: MINT NFT ---
 app.post('/api/mint', upload.single('certificateFile'), async (req, res) => {
     try {
@@ -43,19 +45,36 @@ app.post('/api/mint', upload.single('certificateFile'), async (req, res) => {
         const imageURI = `ipfs://${fileRes.IpfsHash}`;
 
         // B. Upload Metadata JSON
-        const metadata = {
-            name: `Certificate: ${name}`,
-            description: `Chứng chỉ khóa học ${course}`,
-            image: imageURI,
-            attributes: [{ trait_type: "Recipient", value: name }, { trait_type: "Course", value: course }]
-        };
-        const jsonRes = await pinata.pinJSONToIPFS(metadata, { pinataMetadata: { name: `Cert-Meta-${Date.now()}` } });
-        const tokenURI = `ipfs://${jsonRes.IpfsHash}`;
+        const { 
+            issuer_name = "Unknown Issuer", 
+            issued_at = new Date().toISOString(), 
+            description 
+        } = req.body;
 
-        // C. TẠO HASH TỪ FILE GỐC (Quan trọng cho Verifier)
-        // Hash nội dung file (Buffer) bằng SHA256
+        // Hash file (để tạo certificate_hash)
         const fileHash = crypto.createHash('sha256').update(file.buffer).digest('hex');
-        console.log("Hash tạo lúc Mint:", fileHash);
+
+        const metadata = {
+            name: `${name}`, // Ví dụ: Bachelor of Science - Alice
+            description: description || `Verifiable certificate for ${course}`,
+            image: imageURI,
+            //external_url: `https://your-website.com/verify/${fileHash}`, // URL xác thực (tùy chọn)
+            
+            // Attributes ERC-721
+            attributes: [
+                { trait_type: "issuer_name", value: issuer_name },
+                { trait_type: "program", value: course },
+                { trait_type: "issued_at", value: issued_at },
+                { trait_type: "recipient_address", value: userAddress },
+                { trait_type: "policy", value: "non-transferable" } // Nếu muốn SBT
+            ],
+
+            // Các trường Custom (không hiển thị trên OpenSea nhưng Backend dùng)
+            certificate_hash: `0x${fileHash}`,
+            file_cid: fileResult.IpfsHash,
+            issuer: userAddress, // Người mint (Admin)
+            schema_version: "1.0.0"
+        };
 
         // D. Gọi Smart Contract
         const tx = await contract.mintCertificate(userAddress, tokenURI, fileHash);
@@ -65,6 +84,56 @@ app.post('/api/mint', upload.single('certificateFile'), async (req, res) => {
 
     } catch (error) {
         console.error("Lỗi Mint:", error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+app.post('/api/analyze', upload.single('analyzeFile'), async (req, res) => {
+    try {
+        const file = req.file;
+        if (!file) return res.status(400).json({ success: false, error: "Thiếu file ảnh" });
+
+        // 1. Chuyển ảnh sang Base64 để gửi cho AI
+        const base64Image = file.buffer.toString('base64');
+        const dataUrl = `data:${file.mimetype};base64,${base64Image}`;
+
+        // 2. Gọi GPT-4o để phân tích
+        console.log("🤖 Đang gửi ảnh sang AI để phân tích...");
+        
+        const completion = await openai.chat.completions.create({
+            model: "gpt-4o",
+            messages: [
+                {
+                    role: "system",
+                    content: `Bạn là một trợ lý AI chuyên trích xuất dữ liệu từ hình ảnh chứng chỉ/bằng cấp. 
+                    Nhiệm vụ của bạn là trả về một JSON duy nhất (không có markdown, không có text thừa) theo cấu trúc sau:
+                    {
+                        "recipient_name": "Tên người nhận",
+                        "issuer_name": "Tên trường/tổ chức cấp",
+                        "program": "Tên khóa học/ngành học",
+                        "issued_at": "Ngày cấp (Format ISO 8601 YYYY-MM-DD nếu tìm thấy, nếu không thì để null)",
+                        "description": "Mô tả ngắn gọn về chứng chỉ này (ví dụ: Bằng cử nhân ngành X cấp bởi trường Y)"
+                    }
+                    Nếu không tìm thấy trường nào, hãy để giá trị là chuỗi rỗng "".`
+                },
+                {
+                    role: "user",
+                    content: [
+                        { type: "text", text: "Hãy trích xuất thông tin từ chứng chỉ này." },
+                        { type: "image_url", image_url: { url: dataUrl } },
+                    ],
+                },
+            ],
+            response_format: { type: "json_object" } // Bắt buộc trả về JSON
+        });
+
+        // 3. Parse kết quả
+        const aiResult = JSON.parse(completion.choices[0].message.content);
+        console.log("✅ AI trích xuất xong:", aiResult);
+
+        res.json({ success: true, data: aiResult });
+
+    } catch (error) {
+        console.error("❌ Lỗi Analyze:", error);
         res.status(500).json({ success: false, error: error.message });
     }
 });
