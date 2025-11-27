@@ -3,10 +3,12 @@ import { ethers } from 'ethers';
 import axios from 'axios';
 import './App.css';
 import './styles/mobile.css';
+import './styles/tutorial.css';
 import Header from './components/Header';
 import MintSection from './components/MintSection';
 import PortfolioSection from './components/PortfolioSection';
 import VerifySection from './components/VerifySection';
+import TutorialOverlay from './components/TutorialOverlay';
 
 // --- CẤU HÌNH CONTRACT ---
 const CONTRACT_ADDRESS = "0x95C23FFD28612884bd47468f776849B427D77D57";
@@ -37,6 +39,10 @@ function App() {
   const [verifyFile, setVerifyFile] = useState(null);
   const [verifyResult, setVerifyResult] = useState(null);
 
+  // Tutorial State
+  const [showTutorial, setShowTutorial] = useState(false);
+  const [hasSeenTutorial, setHasSeenTutorial] = useState(false);
+
   // --- EFFECT: THEME ---
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
@@ -47,10 +53,34 @@ function App() {
     }
   }, []);
 
+  // --- EFFECT: TUTORIAL ---
+  useEffect(() => {
+    const hasSeenTutorialBefore = localStorage.getItem('hasSeenTutorial');
+    if (!hasSeenTutorialBefore) {
+      // Show tutorial after a short delay for first-time users
+      const timer = setTimeout(() => {
+        setShowTutorial(true);
+      }, 1000);
+      return () => clearTimeout(timer);
+    } else {
+      setHasSeenTutorial(true);
+    }
+  }, []);
+
   const toggleTheme = () => {
     const newTheme = !darkMode;
     setDarkMode(newTheme);
     localStorage.setItem('theme', newTheme ? 'dark' : 'light');
+  };
+
+  const handleTutorialComplete = () => {
+    setShowTutorial(false);
+    setHasSeenTutorial(true);
+    localStorage.setItem('hasSeenTutorial', 'true');
+  };
+
+  const startTutorial = () => {
+    setShowTutorial(true);
   };
 
   // --- LOGIC 1: KẾT NỐI VÍ ---
@@ -252,6 +282,20 @@ function App() {
           )}
         </div>
       </main>
+
+      {/* Tutorial Overlay */}
+      <TutorialOverlay 
+        isVisible={showTutorial}
+        onComplete={handleTutorialComplete}
+      />
+
+      {/* Tutorial Help Button */}
+      {hasSeenTutorial && !showTutorial && (
+        <button className="welcome-tutorial-btn" onClick={startTutorial}>
+          <span>🎯</span>
+          Need Help?
+        </button>
+      )}
     </div>
   );
 }
