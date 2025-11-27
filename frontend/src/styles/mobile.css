@@ -1,0 +1,246 @@
+/* Enhanced Mobile & Responsive Styles */
+
+/* Large Desktop */
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1400px;
+  }
+  
+  .certificates-grid {
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  }
+}
+
+/* Tablet Breakpoint */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 900px;
+    padding: 0 1.5rem;
+  }
+  
+  .certificates-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  
+  .nav-container {
+    padding: 0 1.5rem;
+  }
+  
+  .form-panel {
+    padding: 2.5rem;
+  }
+}
+
+/* Mobile Breakpoint */
+@media (max-width: 768px) {
+  .create-container { 
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  
+  .upload-zone { 
+    min-height: 320px;
+    border-radius: var(--radius-xl);
+  }
+  
+  .nav-container { 
+    padding: 0 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .nav-center {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+  
+  .nav-link {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9rem;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+  }
+  
+  .logo-text { 
+    display: none;
+  }
+  
+  .theme-toggle {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .connect-wallet-btn {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+  }
+  
+  .page-title {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+    margin-bottom: 1rem;
+  }
+  
+  .page-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .main-content {
+    padding: 2.5rem 1rem;
+  }
+  
+  .form-panel {
+    padding: 2rem;
+    border-radius: var(--radius-xl);
+  }
+  
+  .input-field {
+    padding: 1rem 1.25rem;
+  }
+  
+  .create-btn {
+    padding: 1.25rem;
+    font-size: 1rem;
+  }
+  
+  .certificates-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .certificate-card {
+    border-radius: var(--radius-xl);
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+  
+  .action-button {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* Small Mobile Breakpoint */
+@media (max-width: 480px) {
+  .page-title {
+    font-size: clamp(1.75rem, 10vw, 2rem);
+  }
+  
+  .page-subtitle {
+    font-size: 1rem;
+  }
+  
+  .nav-container {
+    padding: 0 0.75rem;
+  }
+  
+  .main-content {
+    padding: 2rem 0.75rem;
+  }
+  
+  .form-panel {
+    padding: 1.5rem;
+  }
+  
+  .upload-zone {
+    min-height: 280px;
+  }
+  
+  .upload-icon {
+    font-size: 3.5rem;
+  }
+  
+  .upload-text {
+    font-size: 1rem;
+  }
+  
+  .input-field {
+    padding: 0.875rem 1rem;
+  }
+  
+  .create-btn {
+    padding: 1.125rem;
+  }
+  
+  .card-body {
+    padding: 1.25rem;
+  }
+  
+  .certificate-name {
+    font-size: 1.2rem;
+  }
+  
+  .card-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .action-button {
+    padding: 0.875rem;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 360px) {
+  .nav-container {
+    padding: 0 0.5rem;
+  }
+  
+  .main-content {
+    padding: 1.5rem 0.5rem;
+  }
+  
+  .form-panel {
+    padding: 1.25rem;
+  }
+  
+  .page-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* Landscape Mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .main-content {
+    padding: 1rem;
+  }
+  
+  .upload-zone {
+    min-height: 200px;
+  }
+  
+  .form-panel {
+    padding: 1.5rem;
+  }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .logo-icon,
+  .upload-icon,
+  .theme-icon {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .certificate-card:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+  
+  .upload-zone:hover {
+    transform: translateY(-2px);
+  }
+  
+  .create-btn:hover {
+    transform: translateY(-2px);
+  }
+}

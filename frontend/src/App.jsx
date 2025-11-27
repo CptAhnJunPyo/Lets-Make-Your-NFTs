@@ -2,6 +2,13 @@ import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import axios from 'axios';
 import './App.css';
+import './styles/mobile.css';
+import './styles/tutorial.css';
+import Header from './components/Header';
+import MintSection from './components/MintSection';
+import PortfolioSection from './components/PortfolioSection';
+import VerifySection from './components/VerifySection';
+import TutorialOverlay from './components/TutorialOverlay';
 
 // --- CẤU HÌNH CONTRACT ---
 const CONTRACT_ADDRESS = "0x95C23FFD28612884bd47468f776849B427D77D57";
@@ -32,6 +39,10 @@ function App() {
   const [verifyFile, setVerifyFile] = useState(null);
   const [verifyResult, setVerifyResult] = useState(null);
 
+  // Tutorial State
+  const [showTutorial, setShowTutorial] = useState(false);
+  const [hasSeenTutorial, setHasSeenTutorial] = useState(false);
+
   // --- EFFECT: THEME ---
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
@@ -42,10 +53,34 @@ function App() {
     }
   }, []);
 
+  // --- EFFECT: TUTORIAL ---
+  useEffect(() => {
+    const hasSeenTutorialBefore = localStorage.getItem('hasSeenTutorial');
+    if (!hasSeenTutorialBefore) {
+      // Show tutorial after a short delay for first-time users
+      const timer = setTimeout(() => {
+        setShowTutorial(true);
+      }, 1000);
+      return () => clearTimeout(timer);
+    } else {
+      setHasSeenTutorial(true);
+    }
+  }, []);
+
   const toggleTheme = () => {
     const newTheme = !darkMode;
     setDarkMode(newTheme);
     localStorage.setItem('theme', newTheme ? 'dark' : 'light');
+  };
+
+  const handleTutorialComplete = () => {
+    setShowTutorial(false);
+    setHasSeenTutorial(true);
+    localStorage.setItem('hasSeenTutorial', 'true');
+  };
+
+  const startTutorial = () => {
+    setShowTutorial(true);
   };
 
   // --- LOGIC 1: KẾT NỐI VÍ ---
@@ -203,277 +238,66 @@ function App() {
   // --- RENDER GIAO DIỆN ---
   return (
     <div className={`app ${darkMode ? 'dark' : 'light'}`}>
-      
-      {/* HEADER */}
-      <header className="navbar">
-        <div className="nav-container">
-          <div className="nav-left">
-            <div className="logo">
-              <span className="logo-icon">🎓</span>
-              <span className="logo-text">CertiFi</span>
-            </div>
-          </div>
-          
-          <nav className="nav-center">
-            <button className={`nav-link ${activeTab === 'mint' ? 'active' : ''}`} onClick={() => setActiveTab('mint')}>
-              Create
-            </button>
-            <button className={`nav-link ${activeTab === 'portfolio' ? 'active' : ''}`} onClick={() => setActiveTab('portfolio')}>
-              Portfolio
-            </button>
-            <button className={`nav-link ${activeTab === 'verify' ? 'active' : ''}`} onClick={() => setActiveTab('verify')}>
-              Verify
-            </button>
-          </nav>
-
-          <div className="nav-right">
-            <button className="theme-toggle" onClick={toggleTheme}>
-              {darkMode ? '☀️' : '🌙'}
-            </button>
-            
-            {!account ? (
-              <button className="connect-wallet-btn" onClick={connectWallet}>Connect Wallet</button>
-            ) : (
-              <div className="wallet-connected">
-                <span className="wallet-address">{account.slice(0,6)}...{account.slice(-4)}</span>
-              </div>
-            )}
-          </div>
-        </div>
-      </header>
+      <Header 
+        account={account}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        darkMode={darkMode}
+        toggleTheme={toggleTheme}
+        connectWallet={connectWallet}
+      />
 
       <main className="main-content">
-      <div className="container">
-          
-          {/* TAB MINT (CẬP NHẬT UI FORM) */}
+        <div className="container">
           {activeTab === 'mint' && (
-            <section className="create-section">
-              <div className="section-header">
-                <h1 className="page-title">Issue Certificate</h1>
-                <p className="page-subtitle">Fill in the details to generate standard JSON Metadata</p>
-              </div>
-              
-              <div className="create-container">
-                {/* Upload Zone (Giữ nguyên) */}
-                <div className="upload-area">
-                    {/* ... (Code Upload UI cũ) ... */}
-                    <div className="upload-zone">
-                        <input type="file" id="file-upload" className="file-input-hidden" onChange={(e) => setSelectedFile(e.target.files[0])} />
-                        <label htmlFor="file-upload" className="upload-label">
-                            {selectedFile ? <div className="file-preview"><div className="file-name">{selectedFile.name}</div></div> : <div className="upload-placeholder">Upload Certificate Image</div>}
-                        </label>
-                    </div>
-                </div>
-
-                {/* Form Input Mới (Nhiều trường hơn) */}
-                <div className="form-panel">
-                  <div className="form-content">
-                    
-                    {/* Hàng 1: Tên sinh viên & Tên bằng */}
-                    <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px'}}>
-                        <div className="input-group">
-                        <label className="input-label">Student Name</label>
-                        <input type="text" className="input-field" placeholder="Alice Nguyen"
-                            value={formData.studentName} onChange={(e) => setFormData({...formData, studentName: e.target.value})}
-                        />
-                        </div>
-                        <div className="input-group">
-                        <label className="input-label">Certificate Name</label>
-                        <input type="text" className="input-field" placeholder="Bachelor of Science"
-                            value={formData.certName} onChange={(e) => setFormData({...formData, certName: e.target.value})}
-                        />
-                        </div>
-                    </div>
-
-                    {/* Hàng 2: Trường & Ngành */}
-                    <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px'}}>
-                        <div className="input-group">
-                        <label className="input-label">Issuer (University)</label>
-                        <input type="text" className="input-field" placeholder="ABC University"
-                            value={formData.issuerName} onChange={(e) => setFormData({...formData, issuerName: e.target.value})}
-                        />
-                        </div>
-                        <div className="input-group">
-                        <label className="input-label">Program / Major</label>
-                        <input type="text" className="input-field" placeholder="Computer Science"
-                            value={formData.programName} onChange={(e) => setFormData({...formData, programName: e.target.value})}
-                        />
-                        </div>
-                    </div>
-
-                    {/* Hàng 3: Ngày cấp & External URL */}
-                    <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px'}}>
-                        <div className="input-group">
-                        <label className="input-label">Issued At</label>
-                        <input type="date" className="input-field"
-                            value={formData.issuedAt} onChange={(e) => setFormData({...formData, issuedAt: e.target.value})}
-                        />
-                        </div>
-                        <div className="input-group">
-                        <label className="input-label">Verification URL</label>
-                        <input type="text" className="input-field" placeholder="https://..."
-                            value={formData.externalUrl} onChange={(e) => setFormData({...formData, externalUrl: e.target.value})}
-                        />
-                        </div>
-                    </div>
-
-                    <div className="input-group">
-                      <label className="input-label">Description</label>
-                      <textarea className="input-field" rows="3" placeholder="Additional details..."
-                        value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})}
-                      />
-                    </div>
-                    
-                    <button className="create-btn" onClick={handleMintRequest} 
-                      disabled={!account || !formData.studentName || !selectedFile}>
-                      Mint Standard Certificate
-                    </button>
-                    
-                    {status && <div className="status-alert">{status}</div>}
-                  </div>
-                </div>
-              </div>
-            </section>
+            <MintSection 
+              account={account}
+              formData={formData}
+              setFormData={setFormData}
+              selectedFile={selectedFile}
+              setSelectedFile={setSelectedFile}
+              status={status}
+              handleMintRequest={handleMintRequest}
+            />
           )}
 
-          {/* TAB 2: PORTFOLIO SECTION */}
           {activeTab === 'portfolio' && (
-            <section className="portfolio-section">
-              <div className="section-header">
-                <h1 className="page-title">My Certificates</h1>
-                <p className="page-subtitle">Manage your blockchain assets</p>
-              </div>
-              {loading ? (
-                <div className="loading-state">
-                  <div className="spinner-ring"></div>
-                  <p>Loading from Blockchain...</p>
-                </div>
-              ) : myNFTs.length === 0 ? (
-                <div className="empty-portfolio">
-                  <div className="upload-icon" style={{fontSize: '3rem', opacity: 0.5}}>📭</div>
-                  <h3>No certificates found</h3>
-                  <p>You haven't earned any certificates yet.</p>
-                  <button className="create-btn" style={{maxWidth: '200px', margin: '20px auto'}} onClick={() => setActiveTab('mint')}>
-                    Create First NFT
-                  </button>
-                </div>
-              ) : (
-                <div className="certificates-grid">
-                  {myNFTs.map((nft, index) => (
-                    // Sử dụng index làm fallback key nếu tokenId bị lỗi
-                    <div key={nft.tokenId || index} className="certificate-card">
-                      <div className="card-media">
-                        {nft.image ? (
-                           <img 
-                             src={nft.image} 
-                             alt={nft.name} 
-                             className="certificate-image"
-                             // Thêm xử lý khi ảnh lỗi -> Hiện ảnh mặc định
-                             onError={(e) => {
-                               e.target.onerror = null; 
-                               e.target.src = "https://via.placeholder.com/400x300?text=No+Image";
-                             }}
-                           />
-                        ) : (
-                           // Placeholder nếu không có link ảnh
-                           <div style={{width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#e2e8f0', color: '#64748b'}}>
-                              No Image
-                           </div>
-                        )}
-                        <div className="card-overlay">
-                          <span className="token-id">#{nft.tokenId}</span>
-                        </div>
-                      </div>
-                      
-                      <div className="card-body">
-                        <h3 className="certificate-name">{nft.name || "Unnamed Certificate"}</h3>
-                        <p className="certificate-description">
-                           {nft.description ? (nft.description.length > 50 ? nft.description.substring(0,50)+"..." : nft.description) : "No description provided."}
-                        </p>
-                        
-                        <div className="card-actions">
-                          <button 
-                            className="action-button secondary" 
-                            onClick={() => handleTransfer(nft.tokenId)}
-                            title="Transfer ownership"
-                          >
-                            Transfer
-                          </button>
-                          <button 
-                            className="action-button danger" 
-                            onClick={() => handleRevoke(nft.tokenId)}
-                            title="Burn/Delete NFT"
-                          >
-                            Revoke
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </section>
+            <PortfolioSection 
+              loading={loading}
+              myNFTs={myNFTs}
+              setActiveTab={setActiveTab}
+              handleTransfer={handleTransfer}
+              handleRevoke={handleRevoke}
+            />
           )}
 
-          {/* TAB 3: VERIFY SECTION */}
           {activeTab === 'verify' && (
-            <section className="create-section">
-              <div className="section-header">
-                <h1 className="page-title">Verify Document</h1>
-                <p className="page-subtitle">Check authenticity on Blockchain</p>
-              </div>
-
-              <div className="create-container">
-                 <div className="upload-area">
-                  <div className="upload-zone">
-                    <input type="file" id="verify-upload" className="file-input-hidden"
-                      onChange={(e) => setVerifyFile(e.target.files[0])}
-                    />
-                    <label htmlFor="verify-upload" className="upload-label">
-                      {verifyFile ? (
-                        <div className="file-preview">
-                          <div className="file-icon-large">🔍</div>
-                          <div className="file-name">{verifyFile.name}</div>
-                        </div>
-                      ) : (
-                         <div className="upload-placeholder">
-                          <div className="upload-icon">🛡️</div>
-                          <div className="upload-text">Upload original file to check</div>
-                        </div>
-                      )}
-                    </label>
-                  </div>
-                </div>
-
-                <div className="form-panel">
-                   <button className="create-btn" onClick={handleVerifyRequest} disabled={!verifyFile}>
-                      Verify Integrity
-                   </button>
-                   {status && <div className="status-alert" style={{marginTop: 10}}>{status}</div>}
-                   
-                   {verifyResult && (
-                      <div className={`verify-result ${verifyResult.verified ? 'valid' : 'invalid'}`}>
-                        <h3>{verifyResult.verified ? "VALID DOCUMENT" : " INVALID DOCUMENT"}</h3>
-                        {verifyResult.verified && (
-                          <div className="verify-details">
-                            <p><strong>Token ID:</strong> #{verifyResult.tokenId}</p>
-                            <p><strong>Owner:</strong> {verifyResult.currentOwner}</p>
-                            <p className="ownership-tag">
-                              {verifyResult.isYourCert ? " You own this!" : " You do NOT own this."}
-                            </p>
-                          </div>
-                        )}
-                        {!verifyResult.verified && <p>This document does not exist on our system.</p>}
-                      </div>
-                   )}
-                </div>
-              </div>
-            </section>
+            <VerifySection 
+              verifyFile={verifyFile}
+              setVerifyFile={setVerifyFile}
+              status={status}
+              verifyResult={verifyResult}
+              handleVerifyRequest={handleVerifyRequest}
+            />
           )}
-
         </div>
       </main>
+
+      {/* Tutorial Overlay */}
+      <TutorialOverlay 
+        isVisible={showTutorial}
+        onComplete={handleTutorialComplete}
+      />
+
+      {/* Tutorial Help Button */}
+      {hasSeenTutorial && !showTutorial && (
+        <button className="welcome-tutorial-btn" onClick={startTutorial}>
+          <span>🎯</span>
+          Need Help?
+        </button>
+      )}
     </div>
   );
 }
+
 export default App;
