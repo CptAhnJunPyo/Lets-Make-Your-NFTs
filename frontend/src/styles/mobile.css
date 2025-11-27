@@ -1,0 +1,72 @@
+/* Mobile & Responsive Styles */
+
+/* Tablet Breakpoint */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 900px;
+  }
+  
+  .certificates-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+/* Mobile Breakpoint */
+@media (max-width: 768px) {
+  .create-container { 
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .upload-zone { 
+    min-height: 280px;
+  }
+  
+  .nav-container { 
+    padding: 0 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .nav-center {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .logo-text { 
+    display: none;
+  }
+  
+  .page-title {
+    font-size: 2.5rem;
+  }
+  
+  .main-content {
+    padding: 2rem 1rem;
+  }
+  
+  .form-panel {
+    padding: 2rem;
+  }
+  
+  .certificates-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Small Mobile Breakpoint */
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .nav-container {
+    padding: 0 0.75rem;
+  }
+  
+  .main-content {
+    padding: 1.5rem 0.75rem;
+  }
+}
